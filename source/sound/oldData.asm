@@ -81,10 +81,10 @@
 		!REF_RPT = $7D
 		!REF_SET = $7E
 		!JUMP = $7F
-
+		
 		!WAIT = $80
 		!INSTRUMENT = $81
-
+		
 
 	;Effect data
 		!SET_VOLUME_LR_SAME = $00
@@ -104,105 +104,76 @@ arch spc700
 base $1000
 
 SongHeader:
-dw nNoteDataBass1, NoteDataDrums, NoteDataLead, NoteDataSupp
+dw nNoteDataBass1, NoteDataDrums, NoteDataNone, NoteDataNone
 dw NoteDataNone, NoteDataNone, NoteDataNone, NoteDataNone
 
 
 nNoteDataBass1:
 	db !INSTRUMENT|($00<<1)  ; Set instrument to 0
-	db !FINE_PITCH, $10
-	;db !PITCH_SLIDE, $F8, $FF
+	db !FINE_PITCH, $00
+	db !PITCH_SLIDE, $F8, $FF
 	db !VOL_SET_BOTH, $7F
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $1B, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $1B, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $1B, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
+	db $30, !WAIT|($10<<1)
+	db !VOL_SET_BOTH, $40
+	db $30, !WAIT|($10<<1)
+	db !VOL_SET_BOTH, $20
+	db $30, !WAIT|($10<<1)
+	db !VOL_SET_BOTH, $7F
+	db $3C, !WAIT|($10<<1)
+	db $30, !WAIT|($10<<1)
+	db $33, !WAIT|($10<<1)
+	db $3F, !WAIT|($10<<1)
+	db $33, !WAIT|($10<<1)
+	db $36, !WAIT|($10<<1)
+	db $42, !WAIT|($10<<1)
+	db $39, !WAIT|($10<<1)
+
+	db !FINE_PITCH, $40
+	db !REF_SET, 11
+	dw nNoteDataBass1+3
+	db !FINE_PITCH, $80
+	db !REF_RPT, 2
+	db !FINE_PITCH, $C0
+	db !REF_RPT, 6
+	db !FINE_PITCH, $FF
+	db !REF_RPT, 10
+
 	db !JUMP
-	dw nNoteDataBass1
+	dw NoteDataNone
 
 NoteDataDrums:
-	db !INSTRUMENT|($01<<1)
-	db $3C, !WAIT|($20<<1)
-	db !INSTRUMENT|($02<<1)
-	db $00, !WAIT|($20<<1)
+	db !WAIT|($00<<1)  ; $40   |
+	db !WAIT|($00<<1)  ; $40   |   $B0
+	db !WAIT|($30<<1)  ; $30   |__
+
+; ===
 	db !INSTRUMENT|($01<<1)
 	db $3C, !WAIT|($10<<1)
+	db !KEY_OFF, !WAIT|($40<<1)
+	db $3C, !WAIT|($10<<1)
+	db !KEY_OFF, !WAIT|($20<<1)
+	db $3C, !WAIT|($10<<1)
+	db !KEY_OFF, !WAIT|($20<<1)
+
+; ===
+.ref0:
+	db $3C, !WAIT|($10<<1)
+	db !KEY_OFF, !WAIT|($10<<1)
+
 	db $3C, !WAIT|($10<<1)
 	db !INSTRUMENT|($02<<1)
 	db $00, !WAIT|($20<<1)
-	;db !KEY_OFF, !WAIT|($40<<1)
-	db !JUMP
-	dw NoteDataDrums
 
-NoteDataLead:
-	db !INSTRUMENT|($00<<1)
-	db !VOL_SET_BOTH, $6F
-	db $30, !WAIT|($40<<1)
-	db $33, !WAIT|($20<<1)
-	db $32, !WAIT|($10<<1)
-	db $30, !WAIT|($30<<1)
-	db $30, !WAIT|($20<<1)
-	db $33, !WAIT|($20<<1)
-	db $32, !WAIT|($10<<1)
-	db $30, !WAIT|($30<<1)
-	db $30, !WAIT|($20<<1)
-	db $33, !WAIT|($20<<1)
-	db $32, !WAIT|($10<<1)
-	db $30, !WAIT|($30<<1)
-	db $30, !WAIT|($20<<1)
-	db $33, !WAIT|($10<<1)
-	db $35, !WAIT|($30<<1)
-	db !JUMP
-	dw NoteDataLead
+	db !INSTRUMENT|($01<<1)
+	db !REF_SET, 4
+	dw NoteDataDrums_ref0
 
-NoteDataSupp:
-	db !INSTRUMENT|($00<<1)
-	db !VOL_SET_BOTH, $6F
-	db $2B, !WAIT|($40<<1)
-	db $2E, !WAIT|($20<<1)
-	db $2C, !WAIT|($10<<1)
-	db $2B, !WAIT|($30<<1)
-	db $2B, !WAIT|($20<<1)
-	db $2E, !WAIT|($20<<1)
-	db $2C, !WAIT|($10<<1)
-	db $2B, !WAIT|($30<<1)
-	db $2B, !WAIT|($20<<1)
-	db $2E, !WAIT|($20<<1)
-	db $2C, !WAIT|($10<<1)
-	db $2B, !WAIT|($30<<1)
-	db $2B, !WAIT|($20<<1)
-	db $30, !WAIT|($10<<1)
-	db $30, !WAIT|($30<<1)
+	db !INSTRUMENT|($01<<1)
+	db $3C, !WAIT|($10<<1)
+; ===
+
 	db !JUMP
-	dw NoteDataSupp
+	dw NoteDataNone
 
 NoteDataNone:
 	db !WAIT|($40<<1)
