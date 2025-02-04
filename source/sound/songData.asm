@@ -121,22 +121,11 @@ nNoteDataBass1:
 	db $1D, !WAIT|($10<<1)
 	db $1F, !WAIT|($10<<1)
 	db $22, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $1B, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $24, !WAIT|($10<<1)
-	db $18, !WAIT|($10<<1)
-	db $1B, !WAIT|($10<<1)
-	db $1D, !WAIT|($10<<1)
-	db $1F, !WAIT|($10<<1)
-	db $22, !WAIT|($10<<1)
+	db !REF_SET, 8
+	dw nNoteDataBass1+3
+	db !REF_RPT, 0
+	db !REF_RPT, 2
+	db !REF_RPT, 4
 	db $18, !WAIT|($10<<1)
 	db $18, !WAIT|($10<<1)
 	db $24, !WAIT|($10<<1)
