@@ -104,7 +104,8 @@ arch spc700
 base $1000
 
 SongHeader:
-dw nNoteDataBass1, NoteDataDrums, NoteDataLead, NoteDataSupp
+;dw nNoteDataBass1, NoteDataDrums, NoteDataLead, NoteDataSupp
+dw nNoteDataBass1, NoteDataNone, NoteDataNone, NoteDataNone
 dw NoteDataNone, NoteDataNone, NoteDataNone, NoteDataNone
 
 
@@ -132,9 +133,12 @@ nNoteDataBass1:
 	db !REF_SET, 16
 	dw nNoteDataBass1+5
 	db !REF_RPT, 0
-	;db !REF_RPT, 2
-	;db !REF_RPT, 4
-	db $0C, !WAIT
+	db $0E, !WAIT|($80<<1)
+	db $0D, !WAIT|($18<<1)
+	db $0D, !WAIT|($18<<1)
+	db $0D, !WAIT|($18<<1)
+	db $10, !WAIT|($18<<1)
+	db $0D, !WAIT|($18<<1)
 	db !JUMP
 	dw nNoteDataBass1
 
