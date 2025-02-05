@@ -134,6 +134,7 @@ nNoteDataBass1:
 	db !REF_RPT, 0
 	;db !REF_RPT, 2
 	;db !REF_RPT, 4
+	db $0C, !WAIT
 	db !JUMP
 	dw nNoteDataBass1
 
@@ -147,8 +148,14 @@ NoteDataDrums:
 	db $3C, !WAIT|($10<<1)
 	db !INSTRUMENT|($02<<1)
 	db $00, !WAIT|($10<<1)
-	db !INSTRUMENT($10<<1)
-	db $3C, !WAIT($10<<1)
+	db !INSTRUMENT|($10<<1)
+	db $3C, !WAIT|($10<<1)
+	db !REF_SET, 6
+	dw NoteDataDrums
+	db !REF_RPT, 0
+	db !INSTRUMENT|($01<<1)
+	db $3C, !WAIT|($40<<1)
+	db $41, !WAIT|($20<<1)
 	db !JUMP
 	dw NoteDataDrums
 
