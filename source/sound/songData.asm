@@ -105,7 +105,7 @@ base $1000
 
 SongHeader:
 ;dw nNoteDataBass1, NoteDataDrums, NoteDataLead, NoteDataSupp
-dw nNoteDataBass1, NoteDataNone, NoteDataNone, NoteDataNone
+dw nNoteDataBass1, NoteDataDrums, NoteDataNone, NoteDataNone
 dw NoteDataNone, NoteDataNone, NoteDataNone, NoteDataNone
 
 
@@ -114,6 +114,7 @@ nNoteDataBass1:
 	db !FINE_PITCH, $10
 	;db !PITCH_SLIDE, $F8, $FF
 	db !VOL_SET_BOTH, $7F
+NoteDataBassSectionA:
 	db $18, !WAIT|($10<<1)
 	db $18, !WAIT|($10<<1)
 	db $24, !WAIT|($10<<1)
@@ -131,35 +132,50 @@ nNoteDataBass1:
 	db $1D, !WAIT|($10<<1)
 	db $1F, !WAIT|($10<<1)
 	db !REF_SET, 16
-	dw nNoteDataBass1+5
+	dw NoteDataBassSectionA
 	db !REF_RPT, 0
-	db $0E, !WAIT|($80<<1)
-	db $0D, !WAIT|($18<<1)
-	db $0D, !WAIT|($18<<1)
-	db $0D, !WAIT|($18<<1)
-	db $10, !WAIT|($18<<1)
-	db $0D, !WAIT|($18<<1)
+	db !REF_RPT, 2
 	db !JUMP
 	dw nNoteDataBass1
 
 NoteDataDrums:
 	db !INSTRUMENT|($01<<1)
-	db $3C, !WAIT|($20<<1)
+	db $3C, !WAIT|($1E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
 	db !INSTRUMENT|($02<<1)
-	db $00, !WAIT|($20<<1)
+	db $00, !WAIT|($1E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
 	db !INSTRUMENT|($01<<1)
-	db $3C, !WAIT|($10<<1)
-	db $3C, !WAIT|($10<<1)
+	db $3C, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db $3C, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
 	db !INSTRUMENT|($02<<1)
-	db $00, !WAIT|($10<<1)
-	db !INSTRUMENT|($10<<1)
-	db $3C, !WAIT|($10<<1)
+	db $00, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db !INSTRUMENT|($01<<1)
+	db $3C, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
 	db !REF_SET, 6
 	dw NoteDataDrums
 	db !REF_RPT, 0
+	db !REF_RPT, 2
 	db !INSTRUMENT|($01<<1)
-	db $3C, !WAIT|($40<<1)
-	db $41, !WAIT|($20<<1)
+	db $3C, !WAIT|($1E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db !INSTRUMENT|($02<<1)
+	db $00, !WAIT|($1E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db !INSTRUMENT|($01<<1)
+	db $3C, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db $3C, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db !INSTRUMENT|($02<<1)
+	db $00, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
+	db $00, !WAIT|($0E<<1)
+	db !KEY_OFF, !WAIT|($02<<1)
 	db !JUMP
 	dw NoteDataDrums
 
